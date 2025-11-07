@@ -1,0 +1,15 @@
+type LastParameter<T> =
+  T extends (...args: [...infer _, infer L]) => any ? L : never;
+
+// ---- KOD BLOKU (DOKUNMAYIN) ----
+const fn3 = (a: string, b: number, c: boolean) => {};
+const fn4 = (a: Date) => {};
+
+let p1: LastParameter<typeof fn3> = true;
+let p2: LastParameter<typeof fn4> = new Date();
+
+// @ts-expect-error
+let errorP: LastParameter<typeof fn3> = "string";
+
+console.log("Soru 18 Başarılı!", p1);
+
